@@ -139,16 +139,16 @@ const TableData = () => {
     }, [month])
 
     return (
-        <div >
+        <div>
             {/* Table Section */}
             <div className='d-inline-block container table-responsive  m-3'>
-                <h1>Transaction Table</h1>
+                <h1 className='title'>Transaction Table</h1>
 
                 <div className='d-inline-flex'>
-                    <input className="p-2 m-2 search-product-box float-left" type="text" placeholder="search intem form table" onChange={searchHandle} />
+                    <input className="p-2 m-2 search-product-box float-left" type="text" placeholder="Search item from table" onChange={searchHandle} />
 
                     <div className=' p-2 d-flex'>
-                        <select className='bg-warning' id="options" value={month} onChange={handleSelectChange}>
+                        <select className='bg' id="options" value={month} onChange={handleSelectChange}>
                             <option value="">Select Month</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -179,7 +179,7 @@ const TableData = () => {
                     </tr>
                     {
                         items.length > 0 ? visibleData.map((item, index) =>
-                            <tr className='border' key={item._id}>
+                            <tr className='border bg' key={item._id}>
                                 <td className='border'>{item.id}</td>
                                 <td className='border'>{item.title}</td>
                                 <td className='border'>{item.description}</td>
@@ -228,7 +228,7 @@ const TableData = () => {
             </div>
 
                 {/* Pie Chart & Static Data */}
-            <div className='d-inline-block container '>
+            <div className='d-inline-block container'>
                 {/* Pie Chart */}
                 <div className='m-2 d-inline-block' style={{ width: '100%', maxWidth: 600 }}>
                     {loading ? (
@@ -248,8 +248,8 @@ const TableData = () => {
 
                 {/* Statistic Data */}
                 <div className='container border m-2 p-4'>
-                    <h3>Statistic Analysis of items for {monthName}</h3>
-                    <div className='bg-info rounded-3 p-4'>
+                    <h3>Statistical Analysis of items for the  <strong>{monthName}</strong> </h3>
+                    <div className='bg rounded-3 p-4'>
                         <p className='fs-2'><strong>Total Sale </strong>= {Math.floor(statisticData.total_sale_amount)}</p>
                         <p className='fs-3'><strong>Total Item Sold </strong>= {statisticData.total_items_sold}</p>
                         <p className='fs-3'><strong>Total Item Not Sold </strong> = {statisticData.total_items_not_sold}</p>

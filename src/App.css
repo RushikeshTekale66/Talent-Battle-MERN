@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  background-color: #efe8e8;
+}
+
+.title{
+  height: 200px;
+  width: 300px;
+  margin: auto;
+  background-color: #ffe187;
+  border-radius: 50%;
+  padding: 54px 30px;
 }
 
 td, th{
@@ -7,10 +17,8 @@ td, th{
   padding: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bg{
+  background-color: #ffe187;
 }
 
 .App-header {
@@ -26,6 +34,12 @@ td, th{
 
 .App-link {
   color: #61dafb;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 @keyframes App-logo-spin {
