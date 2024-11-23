@@ -117,20 +117,22 @@ const TableData = () => {
     }
 
     useEffect(() => {
+        
         if(visibleData.length===0){
             getDataByMonth();
         }
         if (!month) {
-            setMonth(3);
-            getMonth(month)
-            getStatisticData();
-            fetchPieData();
-            getbardata();
-            getDataByMonth();
+            getData();
+            // setMonth(3);
+            // getMonth(month)
+            // getStatisticData();
+            // fetchPieData();
+            // getbardata();
+            // getDataByMonth();
 
         }
         else {
-            getMonth(month)
+            getMonth(month);
             getStatisticData();
             fetchPieData();
             getbardata();
