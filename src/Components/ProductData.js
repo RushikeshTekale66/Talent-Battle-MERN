@@ -58,10 +58,10 @@ const TableData = () => {
     const searchHandle = async (event) => {
         var key = event.target.value;
         console.log(key);
-        if (key==='') {
+        if (key === '') {
             getDataByMonth();
         }
-        else{
+        else {
             let result = await fetch(`http://localhost:5000/search/${key}`);
             result = await result.json();
             if (result) {
@@ -117,8 +117,8 @@ const TableData = () => {
     }
 
     useEffect(() => {
-        
-        if(visibleData.length===0){
+
+        if (visibleData.length === 0) {
             getDataByMonth();
         }
         if (!month) {
@@ -144,13 +144,13 @@ const TableData = () => {
         <div>
             {/* Table Section */}
             <div className='d-inline-block container table-responsive  m-3'>
-                <h1 className='title'>Transaction Table</h1>
+                <h1 className='title bg'>Transaction Table</h1>
 
                 <div className='d-inline-flex'>
-                    <input className="p-2 m-2 search-product-box float-left" type="text" placeholder="Search item from table" onChange={searchHandle} />
+                    <input className="p-2 m-2 search-product-box float-left rounded-3 border" type="text" placeholder="Search item from table" onChange={searchHandle} />
 
                     <div className=' p-2 d-flex'>
-                        <select className='bg' id="options" value={month} onChange={handleSelectChange}>
+                        <select className='bg rounded-3' id="options" value={month} onChange={handleSelectChange}>
                             <option value="">Select Month</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -199,42 +199,47 @@ const TableData = () => {
                     <label style={{ marginTop: '30px' }}>Page No. {currentPage}</label>
                     <button type="button" className="btn btn-success" style={{ marginTop: '30px' }} disabled={endIndex >= items.length} onClick={() => setCurrentPage(currentPage + 1)}>Next &rarr;</button>
                 </div>
-                
-            </div > 
+
+            </div >
 
             {/* BarChart */}
             <div className=' m-5 p-4 d-block'>
-                <h1>Transaction Bar Chart</h1>
-                <div className='d-inline-block' style={{ display: 'flex', maxWidth: 900 }} >
-                    <Chart
-                        width={'900px'}
-                        height={'300px'}
-                        chartType="ColumnChart"
-                        loader={<div>Loading Chart</div>}
-                        data={chartData}
-                        options={{
-                            title: `Bar Chart for ${monthName}`,
-                            chartArea: { width: '60%' },
-                            backgroundColor: '#f0f0f0',
-                            hAxis: {
-                                title: 'Price range for item sold',
-                            },
-                            vAxis: {
-                                title: 'Number of items sold',
-                                ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                                minValue: 0,
-                            },
-                        }}
-                    />
+                <h3>Transaction Bar Chart</h3>
+                <div className='d-inline-block bg rounded-3' style={{ display: 'flex', maxWidth: 900 }} >
+                    {loading ? <div className=''>Select Month !</div> :
+
+
+                        <Chart
+                            width={'900px'}
+                            height={'300px'}
+                            chartType="ColumnChart"
+                            loader={<div>Loading Chart</div>}
+                            data={chartData}
+                            options={{
+                                title: `Bar Chart for ${monthName}`,
+                                chartArea: { width: '90%' },
+                                backgroundColor: '#f0f0f0',
+                                hAxis: {
+                                    title: 'Price range for item sold',
+                                },
+                                vAxis: {
+                                    title: 'Number of items sold',
+                                    ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                                    minValue: 0,
+                                },
+                            }}
+                        />
+                    }
                 </div>
             </div>
 
-                {/* Pie Chart & Static Data */}
+            {/* Pie Chart & Static Data */}
             <div className='d-inline-block container'>
                 {/* Pie Chart */}
-                <div className='m-2 d-inline-block' style={{ width: '100%', maxWidth: 600 }}>
+                <h3>Transaction Pie Chart</h3>
+                <div className='bg m-2 d-inline-block' style={{ width: '100%', maxWidth: 600 }}>
                     {loading ? (
-                        <div>Loading Chart...</div>
+                        <div>Select Month !</div>
                     ) : (
                         <Chart
                             width={'100%'}
@@ -249,13 +254,16 @@ const TableData = () => {
                 </div>
 
                 {/* Statistic Data */}
-                <div className='container border m-2 p-4'>
+                <div className='container m-2 p-4 '>
                     <h3>Statistical Analysis of items for the  <strong>{monthName}</strong> </h3>
-                    <div className='bg rounded-3 p-4'>
-                        <p className='fs-2'><strong>Total Sale </strong>= {Math.floor(statisticData.total_sale_amount)}</p>
-                        <p className='fs-3'><strong>Total Item Sold </strong>= {statisticData.total_items_sold}</p>
-                        <p className='fs-3'><strong>Total Item Not Sold </strong> = {statisticData.total_items_not_sold}</p>
-                    </div>
+                    {
+                        loading ? <div className='bg'>Select Month !</div> :
+                            <div className='bg rounded-3 p-4 fst-italic'>
+                                <p className='fs-2'><strong>Total Sale </strong>= {Math.floor(statisticData.total_sale_amount)}</p>
+                                <p className='fs-2'><strong>Total Item Sold </strong>= {statisticData.total_items_sold}</p>
+                                <p className='fs-2'><strong >Total Item Not Sold </strong> = {statisticData.total_items_not_sold}</p>
+                            </div>
+                    }
                 </div>
             </div>
 
